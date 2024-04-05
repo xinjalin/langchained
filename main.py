@@ -32,8 +32,9 @@ if __name__ == "__main__":
     load_dotenv()
 
     customer_review = """
-    Absolutely love my new wireless headphones! The sound quality is fantastic, and the Bluetooth 
-    connectivity makes it so convenient. Plus, the battery life is impressive. Definitely worth the purchase!
+    Absolutely love my new wireless headphones! The sound quality is fantastic, and the 
+    Bluetooth connectivity makes it so convenient. Plus, the battery life is impressive. Definitely worth the 
+    purchase!
     """
 
     llm_response = product_review(customer_review)
