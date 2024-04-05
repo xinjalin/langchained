@@ -17,9 +17,11 @@ def product_review(review: str) -> str:
     \n{format_instructions}
     """
 
-    review_prompt_template = PromptTemplate(input_variables=["review"], template=product_review_template,
-                                            partial_variables={
-                                                "format_instructions": review_intel_parser.get_format_instructions()})
+    review_prompt_template = PromptTemplate(
+        input_variables=["review"],
+        template=product_review_template,
+        partial_variables={"format_instructions": review_intel_parser.get_format_instructions()}
+    )
 
     llm = ChatOpenAI(temperature=0, model_name='gpt-3.5-turbo')
     chain = LLMChain(llm=llm, prompt=review_prompt_template)
@@ -31,11 +33,23 @@ def product_review(review: str) -> str:
 if __name__ == "__main__":
     load_dotenv()
 
-    customer_review = """
+    customer_review_positive = """
     Absolutely love my new wireless headphones! The sound quality is fantastic, and the 
     Bluetooth connectivity makes it so convenient. Plus, the battery life is impressive. Definitely worth the 
     purchase!
     """
 
-    llm_response = product_review(customer_review)
+    customer_review_neutral = """
+    This coffee maker gets the job done, but it's nothing extraordinary. It brews a 
+    decent cup of coffee, but the taste is pretty average. The design is simple, and it's easy to use, but it doesn't 
+    offer any standout features.
+    """
+
+    customer_review_negative = """
+    I was really disappointed with this blender. It claimed to be powerful, but it struggled 
+    to blend even soft fruits and veggies properly. Plus, it was loud and started leaking after just a few uses. 
+    Definitely not worth the money.
+    """
+
+    llm_response = product_review(customer_review_positive)
     print(llm_response)
