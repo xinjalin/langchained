@@ -4,6 +4,7 @@ from langchain.output_parsers import PydanticOutputParser
 from pydantic import BaseModel, Field
 
 
+# Defines a Pydantic model to structure the output data
 class ReviewIntel(BaseModel):
     sentiment: str = Field(
         description="The sentiment field indicates the overall tone or feeling conveyed in the review"
@@ -18,6 +19,7 @@ class ReviewIntel(BaseModel):
         description="The problem field captures any identified issues or problems mentioned in the review."
     )
 
+    # Defines a method to convert the model instance to a dictionary for easier processing
     def to_dict(self):
         return {
             "sentiment": self.sentiment,
@@ -27,4 +29,5 @@ class ReviewIntel(BaseModel):
         }
 
 
+# Create a parser instance to convert output data into ReviewIntel model instances
 review_intel_parser: PydanticOutputParser = PydanticOutputParser(pydantic_object=ReviewIntel)
